@@ -1,0 +1,163 @@
+[
+  {
+    "code": "A1-S-001",
+    "skill": "speaking",
+    "cefr_level": "A1",
+    "topic": "Daily routine",
+    "prompt": "Tell me about your morning routine. What do you do every day from the time you wake up until you leave home?",
+    "expected_patterns": [
+      "present simple tense",
+      "time expressions (every day, in the morning, then, after that)",
+      "basic verbs: wake up, get up, brush teeth, have breakfast, go to work/school",
+      "short simple sentences"
+    ],
+    "sample_response": "I usually wake up at seven o'clock in the morning. First, I brush my teeth and wash my face. Then, I have breakfast with my family — usually bread and tea. After breakfast, I get dressed and go to work by bus. I start work at nine.",
+    "rubric": {
+      "task_achievement": "Describes a daily morning routine with at least 3 distinct actions",
+      "fluency_coherence": "Simple connectors (then, after that, usually). Pauses tolerated.",
+      "grammatical_range": "Present simple, basic time phrases",
+      "grammatical_accuracy": "Subject-verb agreement maintained in short sentences",
+      "lexical_resource": "Basic everyday vocabulary (wake up, breakfast, bus, work)"
+    },
+    "tags": ["daily-life", "beginner"],
+    "format": "text"
+  },
+  {
+    "code": "A2-S-001",
+    "skill": "speaking",
+    "cefr_level": "A2",
+    "topic": "Weekend activities",
+    "prompt": "Describe what you usually do at the weekend. Where do you go and who do you spend time with?",
+    "expected_patterns": [
+      "present simple + frequency adverbs (usually, often, sometimes)",
+      "going-to-future or present continuous for plans",
+      "prepositions of place (to the park, at home, with my friends)",
+      "linking words (and, but, also)"
+    ],
+    "sample_response": "At the weekend, I usually relax. On Saturday morning, I go to the park with my family. We sometimes meet friends there and have lunch. In the afternoon, I often read a book or watch a film. On Sunday, I usually stay at home and study English.",
+    "rubric": {
+      "task_achievement": "Covers both days, mentions place + companions + activity",
+      "fluency_coherence": "Uses basic linking; stretches beyond single sentences",
+      "grammatical_range": "Present simple, going-to, basic modals",
+      "grammatical_accuracy": "Few errors; meaning clear",
+      "lexical_resource": "Common leisure vocabulary"
+    },
+    "tags": ["leisure"],
+    "format": "text"
+  },
+  {
+    "code": "B1-S-001",
+    "skill": "speaking",
+    "cefr_level": "B1",
+    "topic": "Travel memory",
+    "prompt": "Talk about a journey you remember well. Where did you go, who were you with, and what made it special?",
+    "expected_patterns": [
+      "past simple for narrative events",
+      "past continuous for background",
+      "sequencers (first, then, after that, finally)",
+      "opinion adjectives (amazing, boring, unforgettable)"
+    ],
+    "sample_response": "A journey I remember well was when I went to Isfahan with my family two years ago. We took a bus early in the morning, and the weather was beautiful. First, we visited Naqsh-e Jahan Square, which was very crowded but amazing. We had lunch in a traditional restaurant, and my father told us stories about the history of the city. What made the trip special was spending time together without the pressure of work.",
+    "rubric": {
+      "task_achievement": "Narrates a past journey with setting, characters, and a memorable moment",
+      "fluency_coherence": "Sequenced narrative; clear progression",
+      "grammatical_range": "Past simple/continuous, some present for commentary",
+      "grammatical_accuracy": "Errors do not impede meaning",
+      "lexical_resource": "Travel + descriptive vocabulary"
+    },
+    "tags": ["travel", "narrative"],
+    "format": "text"
+  },
+  {
+    "code": "B2-S-001",
+    "skill": "speaking",
+    "cefr_level": "B2",
+    "topic": "Technology & education",
+    "prompt": "Some people say that smartphones are making students less able to concentrate. Do you agree or disagree, and why?",
+    "expected_patterns": [
+      "clear argument structure (claim, reason, example, counter-argument)",
+      "discourse markers (on the one hand, however, in contrast)",
+      "hedging language (it seems to me, arguably, tend to)",
+      "abstract vocabulary (attention, distraction, cognitive load)"
+    ],
+    "sample_response": "I tend to agree, although it's not a simple issue. On the one hand, smartphones give students instant access to information, which can support learning. On the other hand, research suggests that frequent notifications fragment attention and reduce the ability to focus on long, complex texts. In my own experience, when I study with my phone on the desk, I switch to it every few minutes, and my retention drops. However, the problem isn't the device itself but how we use it — schools that teach digital discipline see better outcomes than those that simply ban phones.",
+    "rubric": {
+      "task_achievement": "Presents a clear position with supporting reasons and at least one counter-argument",
+      "fluency_coherence": "Effective use of discourse markers; logical flow",
+      "grammatical_range": "Conditionals, modals, passive where appropriate",
+      "grammatical_accuracy": "Few noticeable errors; good control",
+      "lexical_resource": "Abstract and topic-specific vocabulary used precisely"
+    },
+    "tags": ["argumentation", "education"],
+    "format": "text"
+  },
+  {
+    "code": "C1-S-001",
+    "skill": "speaking",
+    "cefr_level": "C1",
+    "topic": "Ethics & AI",
+    "prompt": "To what extent should AI systems be allowed to make decisions that affect people's lives, for example in hiring or medical diagnosis?",
+    "expected_patterns": [
+      "nuanced argumentation with concessions",
+      "advanced discourse (be that as it may, notwithstanding, crucially)",
+      "abstract/technical vocabulary (algorithmic bias, accountability, transparency)",
+      "complex sentence structures (clefts, inversion)"
+    ],
+    "sample_response": "The question is less whether AI should be permitted to make such decisions than under what conditions accountability remains possible. In domains like medical diagnosis, AI demonstrably outperforms the average clinician on narrow tasks, and there is a strong moral argument for using it to reduce preventable error. Yet hiring decisions raise fundamentally different concerns — the training data encode historical biases, and the costs of a wrong decision fall on individuals with little recourse. The defensible position, I think, is that AI may inform decisions but should not be the final arbiter in domains where the stakes are irreducibly human. Crucially, this requires regulatory frameworks that mandate transparency, periodic auditing, and a clear right of appeal.",
+    "rubric": {
+      "task_achievement": "Engages with nuance; acknowledges complexity; arrives at a defensible position",
+      "fluency_coherence": "Sophisticated cohesion; ideas developed, not just listed",
+      "grammatical_range": "Wide range used accurately and appropriately",
+      "grammatical_accuracy": "Consistently accurate; errors rare",
+      "lexical_resource": "Precise, including low-frequency and topic-specific items"
+    },
+    "tags": ["ethics", "advanced"],
+    "format": "text"
+  },
+  {
+    "code": "A1-W-001",
+    "skill": "writing",
+    "cefr_level": "A1",
+    "topic": "Self-introduction",
+    "prompt": "Write a short email introducing yourself to a new English teacher. Include your name, age, job or studies, and one thing you like.",
+    "expected_patterns": [
+      "greeting and sign-off",
+      "simple present tense",
+      "basic personal information vocabulary",
+      "very short sentences, perhaps with 'and' connectors"
+    ],
+    "sample_response": "Dear Teacher, My name is Sara. I am 22 years old. I am a student at university. I study English. I like reading books. I am happy to be in your class. Best regards, Sara",
+    "rubric": {
+      "task_achievement": "All four pieces of info present; email format recognizable",
+      "fluency_coherence": "Simple linear flow",
+      "grammatical_range": "Present simple, basic 'I am / I like'",
+      "grammatical_accuracy": "Few errors; comprehensible",
+      "lexical_resource": "Basic personal vocabulary"
+    },
+    "tags": ["email", "beginner"],
+    "format": "text"
+  },
+  {
+    "code": "B1-W-001",
+    "skill": "writing",
+    "cefr_level": "B1",
+    "topic": "Opinion essay",
+    "prompt": "Some people prefer to work for a large company, others for a small one. Write a short essay (120–180 words) explaining which you would choose and why.",
+    "expected_patterns": [
+      "introduction → reasons → conclusion",
+      "would + bare infinitive for hypothetical",
+      "linkers (first of all, in addition, finally, to conclude)",
+      "some topic vocabulary (salary, promotion, teamwork, flexibility)"
+    ],
+    "sample_response": "If I had to choose, I would prefer to work for a small company. First of all, in a small team everyone knows each other, so communication is faster and more personal. In addition, I would have the chance to learn many different skills, because employees often take on several roles. Finally, small companies usually offer more flexibility in working hours. Of course, a large company can provide a higher salary and more chances for promotion, but I believe a small company is a better environment for learning and growing. To conclude, I would choose a small company because it gives me more variety and a closer team.",
+    "rubric": {
+      "task_achievement": "States preference clearly; gives at least 2 developed reasons; within word range",
+      "fluency_coherence": "Clear paragraphing; effective linkers",
+      "grammatical_range": "Conditional/would, comparatives, basic subordination",
+      "grammatical_accuracy": "Errors do not impede understanding",
+      "lexical_resource": "Work-related vocabulary used appropriately"
+    },
+    "tags": ["opinion", "work"],
+    "format": "text"
+  }
+]

@@ -1,0 +1,10 @@
+# Lingua Nova — Exam Machine MVP
+# Run: pip install -r requirements.txt
+
+streamlit>=1.36.0
+streamlit-aggrid>=0.3.4
+sqlalchemy>=2.0.30
+pydantic>=2.7.0
+requests>=2.32.0
+python-dotenv>=1.0.1
+pandas>=2.2.0
