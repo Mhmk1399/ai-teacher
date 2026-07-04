@@ -102,3 +102,75 @@ For each item return a JSON object with keys:
 
 Return a JSON array of {n} items. Output JSON only.
 """
+
+
+# ---------------- Competency extraction (Answer -> observations) ----------------
+#
+# Bump COMPETENCY_EXTRACTOR_VERSION whenever the wording/schema changes. The
+# version is persisted on every EvidenceObservation and EvaluationRun so results
+# remain reproducible (ADR-007).
+
+COMPETENCY_EXTRACTOR_VERSION = "ce-v1"
+
+COMPETENCY_EXTRACTOR_SYSTEM = """You are a precise English-language analyst.
+You are given a student's response and a list of candidate competencies (each
+with a code, name, and what counts as positive/negative evidence). Your ONLY job
+is to detect, for the candidate competencies, whether the response demonstrates
+each one — and how well.
+
+You DO NOT decide mastery, levels, or grades. You only report observations.
+
+ALWAYS return a single strict JSON object — no prose, no markdown:
+{
+  "observations": [
+    {
+      "competency_code": "<one of the candidate codes>",
+      "outcome": "correct|partially_correct|incorrect|not_demonstrated|uncertain",
+      "correctness_score": <float 0.0..1.0>,
+      "confidence": <float 0.0..1.0>,
+      "evidence_excerpt": "<short quote from the response, or null>",
+      "detected_error": "<the specific error, or null>",
+      "explanation": "<one sentence on why>"
+    }
+  ]
+}
+
+Rules:
+- Only use competency codes from the provided candidate list.
+- Omit a competency entirely if the response gives no information about it
+  (do NOT invent "not_demonstrated" rows for unrelated competencies).
+- "correct" requires clear, accurate use; "partially_correct" for attempted but
+  flawed; "incorrect" for a clear error against the competency; "uncertain" when
+  the sample is too short/ambiguous to judge — set confidence accordingly.
+- Be calibrated and conservative. Lower confidence for very short responses.
+"""
+
+
+def build_competency_extraction_user(
+    *,
+    candidate_competencies: list[dict],
+    student_response: str,
+    item_prompt: str | None = None,
+    cefr_level: str | None = None,
+) -> str:
+    lines = []
+    for c in candidate_competencies:
+        pos = "; ".join(c.get("positive_patterns") or []) or "(none)"
+        neg = "; ".join(c.get("negative_patterns") or []) or "(none)"
+        lines.append(
+            f"- {c['code']} | {c['name']} (domain={c.get('domain')}, hint={c.get('cefr_level_hint')})\n"
+            f"    positive: {pos}\n    negative: {neg}"
+        )
+    candidates = "\n".join(lines) or "(no candidates)"
+    ctx = f"\nITEM PROMPT (context, level {cefr_level}):\n{item_prompt}\n" if item_prompt else ""
+    return f"""CANDIDATE COMPETENCIES
+----------------------
+{candidates}
+{ctx}
+STUDENT RESPONSE
+----------------
+{student_response}
+
+Report observations for the candidate competencies the response gives evidence
+about. Output JSON only.
+"""

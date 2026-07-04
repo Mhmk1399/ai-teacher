@@ -38,3 +38,41 @@ def load_sample_items(db: Session) -> int:
         added += 1
     db.commit()
     return added
+
+
+def load_competency_catalog(db: Session, catalog: str = "grammar") -> int:
+    """Load a competency catalog from data/competency_catalogs/<catalog>_seed.json.
+
+    Idempotent: validates each entry with Pydantic, upserts by code, then wires
+    prerequisites once all codes exist. Returns the number of competencies seen.
+    Imports are local so the existing assessment app never hard-depends on the
+    competency package at import time.
+    """
+    from core.competency.repository import (
+        CatalogError, link_prerequisites, upsert_competency,
+    )
+    from core.competency.schemas import CompetencyDefinitionIn
+
+    path: Path = settings.DATA_DIR / "competency_catalogs" / f"{catalog}_seed.json"
+    if not path.exists():
+        return 0
+
+    doc = json.loads(path.read_text(encoding="utf-8"))
+    entries = doc.get("competencies", [])
+
+    prereq_map: dict[str, list[str]] = {}
+    for entry in entries:
+        prereqs = entry.get("prerequisites", []) or []
+        data = CompetencyDefinitionIn.model_validate(entry)
+        upsert_competency(db, data, created_by="seed")
+        if prereqs:
+            prereq_map[data.code] = prereqs
+
+    for code, prereqs in prereq_map.items():
+        try:
+            link_prerequisites(db, code, prereqs)
+        except CatalogError:
+            # A broken reference in seed data should be visible, not silent.
+            raise
+
+    return len(entries)

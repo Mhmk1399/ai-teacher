@@ -8,3 +8,9 @@ pydantic>=2.7.0
 requests>=2.32.0
 python-dotenv>=1.0.1
 pandas>=2.2.0
+
+# Migrations
+alembic>=1.13.0
+
+# Testing (dev)
+pytest>=8.0.0

@@ -20,6 +20,35 @@ A local, privacy-first English exam engine. The PhD master owns the content, set
 
 ---
 
+## Competency layer (Answer → Living Competency Projection)
+
+The platform is evolving from an assessment machine into a competency-driven AI
+teacher. **Competencies are the source of truth; CEFR is a derived projection.**
+See [`docs/`](docs/) (architecture, data model, roadmap) and
+[`docs/decisions/`](docs/decisions/) (ADRs).
+
+The first vertical slice is live:
+
+1. Seed a **grammar competency catalog** (12 competencies, A1→C2) — Competencies page.
+2. An existing **answer** is analyzed by a competency **extractor** (local LLM
+   behind a provider interface; strict Pydantic output; failures recorded, never
+   silently dropped).
+3. A **deterministic** progress engine turns evidence into competency states.
+   One correct answer can never create mastery; mastery needs enough evidence
+   across multiple contexts.
+4. A **CEFR projection** is computed from competency mastery.
+5. The expert **reviews/overrides** observations; projections rebuild to respect it.
+
+### Migrations & tests
+
+```bash
+alembic upgrade head     # build / update the schema (additive; data preserved)
+alembic downgrade -1     # roll back the competency tables only
+pytest                   # full suite — never requires Ollama (uses a fake provider)
+```
+
+---
+
 ## Setup
 
 ### 1. Prerequisites
@@ -93,19 +122,28 @@ lingua-nova/
 │   ├── 2_✍️_Items.py            # Author exam questions
 │   ├── 3_🧪_Exams.py            # Assemble exam templates
 │   ├── 4_🎤_Sessions.py         # Run a session with a student
-│   └── 5_🛡️_Audit.py            # Review & override queue + fine-tune export
+│   ├── 5_🛡️_Audit.py            # Review & override queue + fine-tune export
+│   └── 7_🧠_Competencies.py     # Catalog, extraction, learner map + review
 ├── core/
 │   ├── config.py                # env loader
 │   ├── db.py                    # SQLAlchemy engine + session
 │   ├── models.py                # ORM (students, items, exams, sessions, answers, audit)
 │   ├── llm.py                   # Ollama HTTP client (chat, JSON mode, health)
-│   ├── prompts.py               # All LLM prompt templates
+│   ├── prompts.py               # All LLM prompt templates (versioned)
 │   ├── scoring.py               # Score → strict JSON → confidence flag
 │   ├── exam_engine.py           # Generate exam templates
-│   └── seed.py                  # Load sample_items.json
+│   ├── seed.py                  # Load sample_items.json + competency catalog
+│   ├── ai/                      # Provider interface + Ollama/Fake adapters (ADR-006)
+│   ├── competency/              # Competency models, schemas, repository
+│   ├── evidence/                # Extractor + Answer→projection pipeline
+│   └── progress/                # Deterministic mastery engine + CEFR projection
+├── migrations/                  # Alembic (baseline + competency tables)
 ├── data/
 │   ├── lingua.db                # SQLite (auto-created, gitignored)
-│   └── seeds/sample_items.json  # Starter items
+│   ├── seeds/sample_items.json  # Starter items
+│   └── competency_catalogs/grammar_seed.json
+├── docs/ + docs/decisions/      # Architecture docs + ADRs
+├── tests/                       # pytest (unit / integration / contract)
 ├── scripts/test_ollama.py       # Smoke test
 ├── requirements.txt
 ├── .env.example
